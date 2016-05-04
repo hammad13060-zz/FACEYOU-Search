@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
 // callback url to be invoked whenever message is received
 router.post('/', bodyParser.json(), function(req, res) {
   messaging_events = req.body.entry[0].messaging;
-  for (var i = 0; i < messaging_events.lenght; i++) {
+  for (var i = 0; i < messaging_events.length; i++) {
     var event = messaging_events[i];
     var senderId = event.sender.id;
     if (event.message && event.message.text) {

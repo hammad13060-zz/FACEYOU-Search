@@ -1,0 +1,26 @@
+{
+  "name": "faceyou-search",
+  "version": "1.0.0",
+  "description": "A messenger bot which parses a message and use it as search query for youtube api and return the results",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "deploy": "gcloud preview app deploy  --project faceyou-search",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammad13060/FACEYOU-Search.git"
+  },
+  "author": "hammad13060",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hammad13060/FACEYOU-Search/issues"
+  },
+  "homepage": "https://github.com/hammad13060/FACEYOU-Search#readme",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "express": "^4.13.4",
+    "unirest": "^0.4.2"
+  }
+}

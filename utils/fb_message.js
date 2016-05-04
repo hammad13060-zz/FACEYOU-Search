@@ -1,9 +1,9 @@
 var unirest = require('unirest');
-var fbCredentials = require("./fb_credentials.js");
+var fbCredentials = require("../credentials/fb_credentials.js");
 
 module.exports = {
   sendMessage: function(videoResources, user_id) {
-    message = createMessage(videoResources, user_id);
+    message = this.createMessage(videoResources, user_id);
     unirest.post("https://graph.facebook.com/v2.6/me/messages?access_token=" + fbCredentials.page_access_token)
             .type('json')
             .send(message)
@@ -17,9 +17,8 @@ module.exports = {
   },
 
   createMessage: function(videoResources, user_id) {
-    genericTemplate = createGenericTemplate(videoResources, user_id);
-    var elements = createElementList(videoResources);
-    genericTemplate.message.attachment.payload.elements = elements;
+    genericTemplate = this.createGenericTemplate(user_id);
+    var elements = this.createElementList(videoResources);
 
     if (elements.length === 0) {
       return {
@@ -31,12 +30,13 @@ module.exports = {
         }
       };
     } else if (elements.length > 0) {
+      genericTemplate.message.attachment.payload.elements = elements;
       return genericTemplate;
     }
   },
 
-  createGenericTemplate: function(videoResources, user_id) {
-    tmplate = {
+  createGenericTemplate: function(user_id) {
+    return {
       recipient: {
         id: user_id
       },
@@ -49,23 +49,21 @@ module.exports = {
         }
       }
     };
-
-    return template;
   },
 
   createElementList: function(videoResources) {
     var elements = [];
-    for (i = 0; i < videoResources.length; i++) {
-      elements.push(createElemetTemplate(videoResources[i]));
+    for (var i = 0; i < videoResources.length; i++) {
+      elements.push(this.createElementTemplate(videoResources[i]));
     }
     return elements;
   },
 
-  createElemetTemplate: function(videoResource) {
+  createElementTemplate: function(videoResource) {
     return {
       title: videoResource.snippet.title,
-      image_url: videoResource.snippet.thumbnails.any.url,
-      buttons: createButton(videoResource.id.videoId)
+      image_url: videoResource.snippet.thumbnails.default.url,
+      buttons: this.createButton(videoResource.id.videoId)
     };
   },
 

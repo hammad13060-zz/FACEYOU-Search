@@ -20,6 +20,7 @@
   "homepage": "https://github.com/hammad13060/FACEYOU-Search#readme",
   "dependencies": {
     "async": "^2.0.0-rc.3",
+    "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "unirest": "^0.4.2"
   }

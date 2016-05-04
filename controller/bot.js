@@ -8,6 +8,7 @@ var express = require('express'),
 
 // callback url for server verification
 router.get('/', function(req, res) {
+  console.log('verification url');
   if (req.query['hub.verify_token'] === fbCreds.validation_token) {
     res.send(req.query['hub.challenge']);
   } else {
@@ -17,6 +18,7 @@ router.get('/', function(req, res) {
 
 // callback url to be invoked whenever message is received
 router.post('/', bodyParser.json(), function(req, res) {
+  console.log('new message url');
   messaging_events = req.body.entry[0].messaging;
   for (var i = 0; i < messaging_events.length; i++) {
     var event = messaging_events[i];

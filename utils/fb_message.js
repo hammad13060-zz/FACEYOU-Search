@@ -62,7 +62,7 @@ module.exports = {
   createElementTemplate: function(videoResource) {
     return {
       title: videoResource.snippet.title,
-      image_url: videoResource.snippet.thumbnails.default.url,
+      image_url: videoResource.snippet.thumbnails.high.url,
       buttons: this.createButton(videoResource.id.videoId)
     };
   },
